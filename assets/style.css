@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif, serif;
+}
+
+header {
+    height: 60px;
+    background-image: linear-gradient(to right, rgba(129, 184, 247, 0.8), rgba(0, 102, 218, 0.8));
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 2px lightgray;
+    position: absolute;
+    width: 20%;
+}
+
+input {
+    height: 35px;
+    border-radius: 3px;
+    border-color: lightgray;
+}
+
+.search-card {
+    padding: 20px;
+    position: relative;
+}
+
+.search-card h2 {
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+
+.search-card button {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    height: 35px;
+    color: white;
+    background-image: radial-gradient(rgba(129, 184, 247, 0.8), rgba(0, 102, 218, 0.8));
+    border-radius: 3px;
+    cursor: pointer;
+}
