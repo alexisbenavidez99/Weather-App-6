@@ -15,6 +15,7 @@ function getApi (event) {
         return response.json();
       })
       .then(function (data) {
+        let pastSearches = JSON.parse(localStorage.getItem("response"));
       
     // Current day weather
     // Getting current date
@@ -54,6 +55,7 @@ function getApi (event) {
       })
       .then(function (data) {
         console.log(data)
+        localStorage.setItem("response", JSON.stringify(data.city.name));
 
       // 5 day forecast
       // dayCount for adding one day to the count
@@ -88,9 +90,16 @@ function getApi (event) {
       }
   });
 
-  var pastSearches = localStorage.getItem(city);
-  localStorage.setItem("pastSearches", city)
+var pastCities = localStorage.pastCities ? JSON.parse(localStorage.pastCities) : [];
+pastCities.push(city);
+localStorage.pastCities = JSON.stringify(pastCities)
+
+pastCities = 
+`<button class="past-cities">${city}</button>`
+$('.search-history').append(pastCities);
+
 }
 
 // Event listener for search button
 searchBtn.addEventListener('click', getApi);
+$('.past-cities').on('click', getApi);
