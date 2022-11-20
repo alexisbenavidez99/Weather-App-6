@@ -1,43 +1,84 @@
-var apiKey = '4e6d959d6e4e5a589c56b55027ba326e';
-var city;
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-var userInput = document.querySelector(".form-input");
+var apiKey = 'f132ba58ecb06601167576c176b957b0';
 var searchBtn = document.querySelector(".btn");
 var searchHistory = document.querySelector(".search-history");
-
-// Current city variables
-var currentCity = document.querySelector(".city-card");
-var currentDate = document.querySelector("#current-date");
-var currentWeather = document.querySelector("#current-weather");
-
-// Five day forecast variables
-var forecast5Day = document.querySelector(".five-day-cast");
-var dayOne = document.querySelector("#date-1");
-var weatherOne = document.querySelector(".weather-1");
-var dayTwo = document.querySelector("#date-2");
-var weatherTwo = document.querySelector(".weather-2");
-var dayThree = document.querySelector("#date-3");
-var weatherThree = document.querySelector(".weather-3");
-var dayFour = document.querySelector("#date-4");
-var weatherFour = document.querySelector(".weather-4");
-var dayFive = document.querySelector("#date-5");
-var weatherFive = document.querySelector(".weather-5");
+var currentDay = document.querySelector(".current-weather");
 
 
-
-// userInput = city;
-
-// Current city forecast
-function getApi (city, apiKey) {
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-    userInput = city;
-    fetch(queryURL)
+// Function for API
+function getApi (event) {
+  event.preventDefault();
+    let city = document.querySelector("#city").value
+    let weatherURLToday = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    let weatherURLForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
+    fetch(weatherURLToday)
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
-        console.log(response)
+      
+// Curreny day weather
+     var date = dayjs().format('MM/DD/YYYY');
+     var conditions;
+     if (data.weather[0].main === 'Clear') {
+      conditions = './assets/images/icons8-sun-50.png'
+     } else if (data.weather[0].main === 'Snow' || data.weather[0].main === 'Sleet') {
+      conditions = './assets/images/icons8-light-snow-50.png'
+     } else if (data.weather[0].main === 'Rain') {
+      conditions = './assets/images/icons8-heavy-rain-50.png'
+     } else if (data.weather[0].main === 'Lighting') {
+      conditions = './assets/images/icons8-cloud-lighting-50.png'
+     } else if (data.weather[0].main === 'Thunder') {
+      conditions = './assets/images/icons8-storm-50.png'
+     }
+     var currentDayWeather = 
+     `<div class="current-weather">
+        <h2>${city} (${date})</h2>
+        <img src="${conditions}"/>
+        <p class="temp">Temp: ${data.main.temp} °F</p>
+        <p class="humidity">Humidity: ${data.main.humidity}%</p>
+        <p class="wind">Wind: ${data.wind.speed} MPH</p>
+      </div>`
+      $('.current-weather').append(currentDayWeather);
+
+      fetch(weatherURLForecast)
+      .then(function (response) {
+        return response.json()
       })
+      .then (function (data) {
+        console.log(data)
+      })
+
+      // 5 day forecast
+      let dayCount = 1;
+      for (var i = 4; i < 37; i += 8) {
+        let forecastDay = dayjs().add(dayCount, "day").format("MM/DD/YYYY");
+        if (data.list[i].weather[0].main === 'Clear') {
+          conditions = './assets/images/icons8-sun-50.png'
+         } else if (data.list[i].weather[0].main === 'Snow' || data.list[i].weather[0].main === 'Sleet') {
+          conditions = './assets/images/icons8-light-snow-50.png'
+         } else if (data.list[i].weather[0].main === 'Rain') {
+          conditions = './assets/images/icons8-heavy-rain-50.png'
+         } else if (data.list[i].weather[0].main === 'Lighting') {
+          conditions = './assets/images/icons8-cloud-lighting-50.png'
+         } else if (data.list[i].weather[0].main === 'Thunder') {
+          conditions = './assets/images/icons8-storm-50.png'
+         }
+
+         let forecastInfo =
+         `<div class="forecast-card">
+        <h2>${forecastDay}</h2>
+        <img src="${conditions}"/>
+        <p class="temp">Temp: ${data.list[i].main.temp} °F</p>
+        <p class="humidity">Humidity: ${data.list[i].main.humidity}%</p>
+        <p class="wind">Wind: ${data.list[i].wind.speed} MPH</p>
+      </div>`
+      $('.five-day-cast').append(forecastInfo);
+      dayCount += 1;
+      conditions = "";
+      }
+
+  });
 }
+
 
 searchBtn.addEventListener('click', getApi);

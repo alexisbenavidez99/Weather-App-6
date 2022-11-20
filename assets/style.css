@@ -29,17 +29,17 @@ input {
     border-radius: 3px;
     border-color: lightgray;
 }
-
+/* Styling for city search section */
 .search-card {
     padding: 20px;
     position: relative;
 }
-
+/* Styling for search section heading */
 .search-card h2 {
     padding-bottom: 20px;
     font-size: 30px;
 }
-
+/* Styling for search button */
 .search-card button {
     margin-top: 15px;
     margin-bottom: 25px;
@@ -48,4 +48,26 @@ input {
     background-image: radial-gradient(rgba(129, 184, 247, 0.8), rgba(0, 102, 218, 0.8));
     border-radius: 3px;
     cursor: pointer;
+}
+/* Styling for current city weather section */
+.current-weather {
+    margin: 30px 50px;
+    position: absolute;
+    left: 10%;
+    display: inline-block;
+    top: 30px;
+    width: 70%;
+    border: 2px solid rgb(150, 148, 148);
+    border-radius: 8px;
+}
+/* Styling for current city */
+.current-weather h2 {
+    margin: 20px;
+    font-size: 30px;
+}
+/* Styling for current day's weather status */
+.current-weather p {
+    margin: 20px;
+    font-size: 25px;
+    color: rgb(195, 190, 190);
 }

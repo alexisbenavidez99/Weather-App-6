@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Nunito&family=Quicksand&display=swap" rel="stylesheet">
+    <!-- Link to DayJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
     <link href="./assets/style.css" rel="stylesheet"/>
     <title>Weather Dashboard</title>
 </head>
@@ -14,45 +20,26 @@
     </header>
 
    <main>
+    <!-- Search -->
       <div class="search-card">
         <h2>Search for a city:</h2>
         <form>
-            <input name="city" id="city" type="text" class="form-input"/>
+            <input name="city" id="city" type="text" class="user-input"/>
             <button type="submit" class="btn">Search</button>
         </form>
       </div>
 
+      <!-- Search history -->
       <div class="search-history" id="search-history"></div>
 
-      <div class="city-card" id="city-card">
-        <div id="current-date"></div>
-        <div class="current-weather"></div>
-      </div>
+      <!-- Current weather display -->
+      <section class="current-weather"></section>
 
-      <div class="five-day-cast" id="five-day-cast">
+      <!-- 5 day weather display -->
+      <div class="five-day-cast" id="five-day-cast"></div>
 
-        <div id="date-1">
-            <div class="weather-1"></div>
-        </div>
-
-        <div id="date-2">
-            <div class="weather-2"></div>
-        </div>
-
-        <div id="date-3">
-            <div class="weather-3"></div>
-        </div>
-
-        <div id="date-4">
-            <div class="weather-4"></div>
-        </div>
-
-        <div id="date-5">
-            <div class="weather-5"></div>
-        </div>
-
-      </div>
    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/script.js"></script>
 </body>
 </html>
