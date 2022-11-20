@@ -16,8 +16,11 @@ function getApi (event) {
       })
       .then(function (data) {
       
-// Curreny day weather
+    // Current day weather
+    // Getting current date
      var date = dayjs().format('MM/DD/YYYY');
+
+    // If statement to check weather condition and set appropiate icon
      var conditions;
      if (data.weather[0].main === 'Clear') {
       conditions = './assets/images/icons8-sun-50.png'
@@ -30,6 +33,8 @@ function getApi (event) {
      } else if (data.weather[0].main === 'Thunder') {
       conditions = './assets/images/icons8-storm-50.png'
      }
+
+    // Creating HTML div for current weather and inserting data from API
      var currentDayWeather = 
      `<div class="current-weather">
         <h2>${city} (${date})</h2>
@@ -38,8 +43,9 @@ function getApi (event) {
         <p class="humidity">Humidity: ${data.main.humidity}%</p>
         <p class="wind">Wind: ${data.wind.speed} MPH</p>
       </div>`
-      $('.current-weather').append(currentDayWeather);
+      $('.current-weather').append(currentDayWeather); // Appending it to HTML div
 
+      // Fetching data from forecast API
       fetch(weatherURLForecast)
       .then(function (response) {
         return response.json()
@@ -49,9 +55,12 @@ function getApi (event) {
       })
 
       // 5 day forecast
+      // dayCount for adding one day to the count
       let dayCount = 1;
+      // For loop
       for (var i = 4; i < 37; i += 8) {
-        let forecastDay = dayjs().add(dayCount, "day").format("MM/DD/YYYY");
+        let forecastDay = dayjs().add(dayCount, "day").format("MM/DD/YYYY"); // Adding a day to the current day and formatting it 
+      // If statement to check weather condition and set appropiate icon
         if (data.list[i].weather[0].main === 'Clear') {
           conditions = './assets/images/icons8-sun-50.png'
          } else if (data.list[i].weather[0].main === 'Snow' || data.list[i].weather[0].main === 'Sleet') {
@@ -64,6 +73,7 @@ function getApi (event) {
           conditions = './assets/images/icons8-storm-50.png'
          }
 
+         // Creating divs for forecast days and inserting data
          let forecastInfo =
          `<div class="forecast-card">
         <h2>${forecastDay}</h2>
@@ -72,13 +82,13 @@ function getApi (event) {
         <p class="humidity">Humidity: ${data.list[i].main.humidity}%</p>
         <p class="wind">Wind: ${data.list[i].wind.speed} MPH</p>
       </div>`
-      $('.five-day-cast').append(forecastInfo);
-      dayCount += 1;
+      $('.five-day-cast').append(forecastInfo); // Appending it to HTML
+      dayCount += 1; // Adds a day to the dayCount
       conditions = "";
       }
 
   });
 }
 
-
+// Event listener for search button
 searchBtn.addEventListener('click', getApi);
