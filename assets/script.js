@@ -2,22 +2,15 @@ var apiKey = 'f132ba58ecb06601167576c176b957b0';
 var searchBtn = document.querySelector(".btn");
 var searchHistory = document.querySelector(".search-history");
 var currentDay = document.querySelector(".current-weather");
+var searchHistoryBtn = document.querySelector(".past-cities");
 
-// var currentTemp = document.querySelector('.current-temp');
-// var currentHumidity = document.querySelector('.current-humidity');
-// var currentWind = document.querySelector('.current-wind');
-
-// var forecastTemp = document.querySelector('.forecast-temp');
-// var forecastHumidity = document.querySelector('.forecast-humidity');
-// var forecastWind = document.querySelector('.forecast-wind');
-
-// if (currentTemp.textContent === true && currentHumidity === true && c)
 // Function for API
 function getApi (event) {
   event.preventDefault(); // Prevents form from submitting
     let city = document.querySelector("#city").value
     let weatherURLToday = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     let weatherURLForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+    // Emptying divs to replace data for new city
     $('.current-weather').empty();
     $('.five-day-cast').empty();
     fetch(weatherURLToday)
@@ -112,4 +105,7 @@ $('.search-history').append(pastCities);
 
 // Event listener for search button
 searchBtn.addEventListener('click', getApi);
-$('.past-cities').on('click', getApi);
+$('.past-cities').on('click', function (event) {
+  city = $('.past-cities').val()
+  getApi(city)
+})
