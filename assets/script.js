@@ -3,13 +3,23 @@ var searchBtn = document.querySelector(".btn");
 var searchHistory = document.querySelector(".search-history");
 var currentDay = document.querySelector(".current-weather");
 
+// var currentTemp = document.querySelector('.current-temp');
+// var currentHumidity = document.querySelector('.current-humidity');
+// var currentWind = document.querySelector('.current-wind');
 
+// var forecastTemp = document.querySelector('.forecast-temp');
+// var forecastHumidity = document.querySelector('.forecast-humidity');
+// var forecastWind = document.querySelector('.forecast-wind');
+
+// if (currentTemp.textContent === true && currentHumidity === true && c)
 // Function for API
 function getApi (event) {
   event.preventDefault(); // Prevents form from submitting
     let city = document.querySelector("#city").value
     let weatherURLToday = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
-    let weatherURLForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
+    let weatherURLForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+    $('.current-weather').empty();
+    $('.five-day-cast').empty();
     fetch(weatherURLToday)
       .then(function (response) {
         return response.json();
@@ -40,9 +50,9 @@ function getApi (event) {
      `<div class="current-weather">
         <h2>${city} (${date})</h2>
         <img src="${conditions}"/>
-        <p class="temp">Temp: ${data.main.temp} °F</p>
-        <p class="humidity">Humidity: ${data.main.humidity}%</p>
-        <p class="wind">Wind: ${data.wind.speed} MPH</p>
+        <p class="current-temp">Temp: ${data.main.temp} °F</p>
+        <p class="current-humidity">Humidity: ${data.main.humidity}%</p>
+        <p class="current-wind">Wind: ${data.wind.speed} MPH</p>
       </div>`
       $('.current-weather').append(currentDayWeather); // Appending it to HTML div
 
@@ -81,9 +91,9 @@ function getApi (event) {
          `<div class="forecast-card">
         <h2>${forecastDay}</h2>
         <img src="${conditions}"/>
-        <p class="temp">Temp: ${data.list[i].main.temp} °F</p>
-        <p class="humidity">Humidity: ${data.list[i].main.humidity}%</p>
-        <p class="wind">Wind: ${data.list[i].wind.speed} MPH</p>
+        <p class="forecast-temp">Temp: ${data.list[i].main.temp} °F</p>
+        <p class="forecast-humidity">Humidity: ${data.list[i].main.humidity}%</p>
+        <p class="forecast-wind">Wind: ${data.list[i].wind.speed} MPH</p>
       </div>`
       $('.five-day-cast').append(forecastInfo); // Appending it to HTML
       dayCount += 1; // Adds a day to the dayCount
