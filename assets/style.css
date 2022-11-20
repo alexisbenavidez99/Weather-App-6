@@ -71,3 +71,35 @@ input {
     font-size: 25px;
     color: rgb(195, 190, 190);
 }
+ /* Styling for forecast section */
+.five-day-cast {
+    margin: 50px;
+    margin-right: 130px;
+    position: absolute;
+    right: 0;
+    top: 400px;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+/* Styling for forecast cards */
+.forecast-card {
+    margin: 10px;
+    width: 250px;
+    height: 300px;
+    padding-left: 10px;
+    background-color: rgba(0, 102, 218, 0.8);
+    font-size: 20px;
+    border-radius: 8px;
+}
+/* Styling for forecast card heading */
+.forecast-card h2 {
+    margin: 20px 5px 10px 5px;
+    /* color: rgb(10, 112, 202); */
+    font-size: 30px;
+}
+/* Styling for forecast card weather status */
+.forecast-card p {
+    margin: 15px 5px 15px 5px;
+    color: rgb(195, 190, 190)
+}

@@ -6,7 +6,7 @@ var currentDay = document.querySelector(".current-weather");
 
 // Function for API
 function getApi (event) {
-  event.preventDefault();
+  event.preventDefault(); // Prevents form from submitting
     let city = document.querySelector("#city").value
     let weatherURLToday = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     let weatherURLForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
@@ -45,14 +45,15 @@ function getApi (event) {
       </div>`
       $('.current-weather').append(currentDayWeather); // Appending it to HTML div
 
+    })
+
       // Fetching data from forecast API
       fetch(weatherURLForecast)
       .then(function (response) {
         return response.json()
       })
-      .then (function (data) {
+      .then(function (data) {
         console.log(data)
-      })
 
       // 5 day forecast
       // dayCount for adding one day to the count
@@ -84,10 +85,11 @@ function getApi (event) {
       </div>`
       $('.five-day-cast').append(forecastInfo); // Appending it to HTML
       dayCount += 1; // Adds a day to the dayCount
-      conditions = "";
       }
-
   });
+
+  var pastSearches = localStorage.getItem(city);
+  localStorage.setItem("pastSearches", city)
 }
 
 // Event listener for search button

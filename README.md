@@ -26,7 +26,7 @@ THEN I am again presented with current and future conditions for that city
 ## Preview
 
 ## Usage
-Link to deployed website:
+Link to deployed website: https://alexisbenavidez99.github.io/Weather-App-6/
 
 ## License
 MIT License
