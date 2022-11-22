@@ -24,6 +24,7 @@ THEN I am again presented with current and future conditions for that city
 ```
 
 ## Preview
+![Screenshot](./assets/images/Screenshot%202022-11-20%20at%203.11.35%20PM.png)
 
 ## Usage
 Link to deployed website: https://alexisbenavidez99.github.io/Weather-App-6/
